@@ -1,0 +1,137 @@
+#include <iostream>
+#include <stdlib.h>
+#include <vector>
+#include <random>
+#include <chrono>
+
+
+using namespace std;
+
+class matrix{
+    public:
+        int rowCount;
+        int colCount;
+        vector<vector<int> > matrixArray;
+
+
+    matrix(int row=1, int col=1): rowCount(row), colCount(col){
+        matrixArray.resize(rowCount, vector<int>(colCount,0));  //Array als Vector "getarnt", Dimensionen werden manuell gesetzt
+    }
+
+    void init(){
+        for(int i = 0; i < rowCount;i++){
+            for(int k = 0; k < colCount; k++){
+                matrixArray[i][k] = 0; //Mittels doppelter for-Schleife durch Vector iterieren
+            }
+        }
+    }
+
+    void input(){
+        cout << "Format: Erst wird die Row selektiert, dann die Coloumn gesetzt \n" << "Anzahl an Zeilen: " << rowCount << "\n Anzahl an Spalten: " << colCount << " \n";
+        for(int i = 0; i < rowCount;i++){
+            for(int k = 0; k < colCount; k++){
+                int temp = 0;
+                cout << "Eingabe des Wertes ";
+                cin >> temp;
+                cout << "\n";
+                matrixArray[i][k] = temp; //Doppelte Schleife, Eingabe durch user
+            }
+    }
+    }
+
+    void randomFill(){
+        for(int i = 0; i < rowCount;i++){
+            for(int k = 0; k < colCount; k++){
+                matrixArray[i][k] = rand(); //Mittels doppelter for-Schleife durch Vector iterieren, dann rand()
+            }
+        }
+    }
+
+    void print(){
+        for(int i = 0; i < rowCount;i++){
+            cout << "Row " << i << ": ";
+            for(int k = 0; k < colCount; k++){
+                int temp = matrixArray[i][k];
+                cout << temp << "\t";
+            }
+            cout << "\n";
+        }
+    }
+
+
+    void Add(matrix m, long& actioncounter){
+        actioncounter = 0;
+        if(this->colCount != m.colCount){
+            cout << "Dimensionen der Matrizen stimmen nicht überein";
+            }
+
+        else {
+            for(int i = 0; i<rowCount;i++){
+                for(int k = 0; k<colCount; k++){
+                    matrixArray[i][k]+= m.matrixArray[i][k];
+                    actioncounter++;
+                }
+            }
+        }
+        }
+
+
+
+    void Mult(matrix m, long& actioncounter){
+        actioncounter=0;
+        vector<vector<int> > result;
+        result.resize(rowCount, vector<int>(colCount));
+        for (int i = 0; i < rowCount; i++) {
+            for (int j = 0; j < colCount; j++) {
+                result[i][j] = 0; // Iteriere über den Ergebnis-Vektor und setze alles erst einmal auf 0
+                actioncounter+=1;
+                for (int k = 0; k < colCount; k++) {
+                    result[i][j] += matrixArray[i][k] * m.matrixArray[k][j]; // matrixarray[i][k] iteriert über this->matrixarray
+                    actioncounter+=1;
+            }
+        }
+    }
+    matrixArray = result;
+
+}
+};
+
+
+
+int main(){
+    long actioncounter;
+    int dimension=1;
+    int lastDimension;
+    int boundaryDur=300;
+    int dur;
+    do{
+    cout << " ------------------- \n";
+    cout << "dimension: " << dimension << "\n";
+    matrix m1(dimension,dimension);
+    matrix m2(dimension,dimension);
+    m1.randomFill();
+    m2.randomFill();
+    auto begin = chrono::high_resolution_clock::now();
+    m1.Mult(m2, actioncounter);
+    auto end = chrono::high_resolution_clock::now();
+    auto duration = chrono::duration_cast<chrono::seconds>(end - begin);
+    dur = duration.count();
+    cout << "Dauer: " << duration.count() << "Sekunden \n" << "Ingesamt wurden: " << actioncounter << " Aktionen benötigt. \n";
+
+
+    if(duration.count() > boundaryDur){
+        dimension = (dimension + lastDimension) / 2;
+    }
+    else
+    {
+
+        lastDimension = dimension;
+        dimension*=2;
+    }
+    } while ( dur != boundaryDur);
+    return 0;
+}
+
+// T = 1 Minute => Dimension: 1644
+
+
