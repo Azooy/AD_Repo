@@ -17,6 +17,8 @@ void selectionSort(int [], int);
 void merge(int [], int, int, int);
 bool findS(int [], int, int);
 void MergeSort(int [], int, int);
+void insertionSort_rec(int [], int, int);
+void mergeSort_it(int []);
 
 
 #endif //AD_SE_4_UE_4_H

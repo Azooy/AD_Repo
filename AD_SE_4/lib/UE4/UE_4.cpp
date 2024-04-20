@@ -1,4 +1,6 @@
 #include "iostream"
+#include "tuple"
+#include "stack"
 #include "UE_4.h"
 
 int binSearch(int a[], int length, int search){
@@ -25,7 +27,6 @@ void swapb(int &a, int &b){
 }
 
 
-
 void bubblesortRev(int a[], int length){
     for(int i = length; i >= 0; i--){
         for(int j = 0; j<i; j++){
@@ -47,7 +48,6 @@ void bubblesortRev(int a[], int length){
  * Laufindex j gefüllt wird.
  *
  */
-
 
 
 void insertionSort(int a[], int length){
@@ -178,11 +178,11 @@ void Merge(int a[],int f,int l,int m) {
     int a1f = f, a1l = m-1; // Calculate the first and last index of the left array
     int a2f = m, a2l = l; // Calculate the first and last index of the right array
     int *anew = new int[n]; // Reserve Memory for extra array
-    for (i = 0;i < n; i++) // Iterate over the array
+    for (i = 0; i < n; i++) // Iterate over the array
     {
         if (a1f <= a1l) { // Ist der letzte Index größer gleich als der erste? vom linken array
             if (a2f <= a2l){ // ist der letzte Index größer gleich als der Erste? vom rechten array
-                if (a[a1f] <= a[a2f]) // Ist der erste Index vom linken array kleiner/gleich dem des ersten?
+                if (a[a1f] <= a[a2f]) // Ist der erste Index vom linken array kleiner/gleich dem des rechten?
                     anew[i]=a[a1f++]; // Dann setze das anew[i] den Wert vom linken array, dann schiebe pointer weiter
                 else anew[i]=a[a2f++]; // Wenn nicht dann nehme den Wert vom rechten Array
             }
@@ -194,10 +194,10 @@ void Merge(int a[],int f,int l,int m) {
 }
 
 void MergeSort(int a[],int f,int l){
-    if (f<l) {
+    if (f<l) { // Rufe die Funktion solange bis nur noch ein Element im Array ist.
         int m = (f+l+1)/2;
-        MergeSort(a,f,m-1);
-        MergeSort(a,m,l);
+        MergeSort(a, f,m-1);
+        MergeSort(a,m, l);
         Merge(a,f,l,m);
     }
 }
@@ -219,3 +219,15 @@ bool findS(int a[], int length, int s){
     return false;
 }
 
+void insertionSort_rec(int a[], int length, int i) {
+    if (i < length) {
+        int key = a[i];
+        int j = i - 1; // j ist der index um durch das Sortierte Array zu iterieren
+        while (j >= 0 && key < a[j]) {
+            a[j + 1] = a[j];
+            j--;
+        }
+        a[j + 1] = key;
+        insertionSort_rec(a, length, i + 1);
+    }
+}

@@ -67,6 +67,12 @@ build CMakeFiles/AD_SE_4.dir/lib/UE3/UE_3.cpp.o: CXX_COMPILER__AD_SE_4_unscanned
   OBJECT_DIR = CMakeFiles/AD_SE_4.dir
   OBJECT_FILE_DIR = CMakeFiles/AD_SE_4.dir/lib/UE3
 
+build CMakeFiles/AD_SE_4.dir/lib/UE4/UE4_2.cpp.o: CXX_COMPILER__AD_SE_4_unscanned_Debug /Users/jendrikjuergens/Desktop/Uni_OTH/Semester_4/AD_SE_4/lib/UE4/UE4_2.cpp || cmake_object_order_depends_target_AD_SE_4
+  DEP_FILE = CMakeFiles/AD_SE_4.dir/lib/UE4/UE4_2.cpp.o.d
+  FLAGS = -g -std=gnu++2b -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.0.sdk -fcolor-diagnostics
+  OBJECT_DIR = CMakeFiles/AD_SE_4.dir
+  OBJECT_FILE_DIR = CMakeFiles/AD_SE_4.dir/lib/UE4
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target AD_SE_4
@@ -75,7 +81,7 @@ build CMakeFiles/AD_SE_4.dir/lib/UE3/UE_3.cpp.o: CXX_COMPILER__AD_SE_4_unscanned
 #############################################
 # Link the executable AD_SE_4
 
-build AD_SE_4: CXX_EXECUTABLE_LINKER__AD_SE_4_Debug CMakeFiles/AD_SE_4.dir/main.cpp.o CMakeFiles/AD_SE_4.dir/lib/UE4/UE_4.cpp.o CMakeFiles/AD_SE_4.dir/lib/UE3/UE_3.cpp.o
+build AD_SE_4: CXX_EXECUTABLE_LINKER__AD_SE_4_Debug CMakeFiles/AD_SE_4.dir/main.cpp.o CMakeFiles/AD_SE_4.dir/lib/UE4/UE_4.cpp.o CMakeFiles/AD_SE_4.dir/lib/UE3/UE_3.cpp.o CMakeFiles/AD_SE_4.dir/lib/UE4/UE4_2.cpp.o
   FLAGS = -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.0.sdk
   OBJECT_DIR = CMakeFiles/AD_SE_4.dir
   POST_BUILD = :
