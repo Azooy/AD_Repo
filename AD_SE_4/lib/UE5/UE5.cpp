@@ -196,6 +196,12 @@ vector<vector<int>> strassen(vector<vector<int>>& m, vector<vector<int>>& n, int
         O_21 = add(p2,p4);
         O_22 = add(sub(p1,p2),add(p3,p6));
 
+        /*
+         * Hier muss noch der Join realisiert werden, dafür eine weitere Zielmatrix mit der ganz ursprünglichen
+         * Größe erstellen. Dabei 4 For-Loops die entsprechend für den Quadranten links oben, rechts oben, links unten, rechts unten
+         * mappen. (ist easy trust me)
+         *
+         * */
 
     }
 
