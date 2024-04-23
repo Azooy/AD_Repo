@@ -1,38 +1,31 @@
 #include <iostream>
-#include <random>
-#include "algorithm"
-#include "chrono"
-#include "lib/UE4/UE4_2.h"
+#include "lib/UE5/UE5.h"
 
 using namespace std;
 
+
+
 int main() {
-    //Just for randomness -- Swap first with random index
-    random_device rd;
-    std::default_random_engine rng(rd());
-    std::vector<int> numbers(50'000'000);
-    for(int a=0; a < 50'000'000; a++){
-        numbers[a] = a;
+    vector<vector<int>> matrix(8, vector<int>(8, 2));
+    vector<vector<int>> matrix2(8, vector<int>(8, 1));
+    vector<vector<int>> matrix3(8, vector<int>(8, 0));
+    vector<vector<int>> matrix4(4, vector<int>(4, 0));
+
+    matrix3 = strassen(matrix, matrix2, 8);
+    matrix4 = matmul1(matrix, matrix2);
+    for(int i = 0; i < 8; i++){
+        for(int j = 0; j < 8; j++){
+            cout << matrix3[i][j] << " ";
+        }
+        cout << "\n";
     }
 
-    shuffle(numbers.begin(), numbers.end(), rng);
-
-
-    auto start = std::chrono::high_resolution_clock::now();
-    MergeSort_Vec(numbers, 0, 50'000'000);
-    auto end = std::chrono::high_resolution_clock::now();
-    std::chrono::duration<double> elapsed_seconds = end - start;
-    cout << "Vergangene Zeit :" << elapsed_seconds.count() << " Sekunden" << endl;
-
-
-    return 0;
-
-    /*
-     * Bubblesort: 105.000 Elemente, 60,75 Sekunden
-     * Quicksort: 150.000.000 Elemente, 58,03 Sekunden
-     * Mergesort: 50.000.000 Elemente, 63,60 Sekunden
-     */
-
+    for(int i = 0; i < 2; i++){
+        for(int j = 0; j < 2; j++){
+            cout << matrix4[i][j] << " ";
+        }
+        cout << "\n";
+    }
 
 
 }
