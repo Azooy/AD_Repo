@@ -1,0 +1,122 @@
+#include <string>
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include <regex>
+
+using namespace std;
+
+string cmdarray[25];
+int dataarray[25];
+vector<int> reg(6);
+int pc=0;
+
+void ADD(int adress){
+    reg.at(0)+= reg.at(adress);
+}
+
+void SUB(int adress){
+    reg.at(0)-=reg.at(adress);
+}
+
+void MUL(int adress){
+    reg.at(0)*=reg.at(adress);
+}
+
+void DIV(int adress){
+    reg.at(0)/=reg.at(adress);
+    cout << reg.at(0) << " div " << endl;
+}
+
+void STA(int adress){
+    reg.at(adress) = reg.at(0);
+}
+
+void INP(int adress){
+    cout << "Gib bitte die obere Grenze ein: \n";
+    cin >> reg.at(adress);
+}
+
+void LDK(int i){
+    reg.at(0)=i;
+}
+
+void LDA(int adress){
+    reg.at(0)=reg.at(adress);
+}
+
+
+void OUT(int adress){
+    cout << reg.at(adress) << "\n";
+}
+
+int HLT(int n){
+    return n;
+}
+
+bool JLE(){
+    if(reg.at(0) - reg.at(4) <= 0){
+        return true;
+    } else {
+        return false;
+    }
+}
+
+int main(){
+    int counter = 0;
+    string line;
+    int adressdata=0;
+    regex re("([A-Z]+) ([0-9]+)(.*)?");
+    smatch match;
+
+    /*
+    Read the txt.file line by line, check every line against regex re, comments are optional
+    fill command array and data array
+    */
+    ifstream file("RAM_ASM.txt");
+    while(getline(file, line)){
+        if(regex_match(line, match, re)){
+            string command = match[1].str();
+            int number = stoi(match[2].str());
+            cmdarray[counter] = command;
+            dataarray[counter] = number;
+            counter++;
+        }
+    }
+
+    /*
+    handle command array and data array
+    */
+
+    for(pc = 0;pc < 16; pc++){
+        int adress = dataarray[pc];
+        string cmd = cmdarray[pc];
+        if(cmd == "ADD"){
+            ADD(adress);
+        } else if(cmd == "SUB"){
+            SUB(adress);
+        } else if(cmd == "LDK"){
+            LDK(adress);
+        }else if(cmd == "STA"){
+            STA(adress);
+        }else if(cmd == "INP"){
+            INP(adress);
+        }else if(cmd == "MUL"){
+            MUL(adress);
+        }else if(cmd == "LDA"){
+            LDA(adress);
+        }else if(cmd == "JMP") {
+            pc = 9;
+        } else if(cmd=="HLT"){
+            return HLT(99);
+        } else if(cmd=="OUT"){
+            cout << reg.at(adress);
+        } else if(cmd =="JLE"){
+            if(JLE()==true){
+                pc = dataarray[pc];
+            }
+        }
+    }
+
+
+}

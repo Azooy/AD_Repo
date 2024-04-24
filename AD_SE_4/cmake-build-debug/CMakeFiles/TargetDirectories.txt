@@ -1,0 +1,3 @@
+/Users/jendrikjuergens/Desktop/Uni_OTH/Semester_4/AD_SE_4/cmake-build-debug/CMakeFiles/AD_SE_4.dir
+/Users/jendrikjuergens/Desktop/Uni_OTH/Semester_4/AD_SE_4/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/jendrikjuergens/Desktop/Uni_OTH/Semester_4/AD_SE_4/cmake-build-debug/CMakeFiles/rebuild_cache.dir

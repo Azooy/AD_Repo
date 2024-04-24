@@ -1,0 +1,16 @@
+LDK 00 // Load 0 in 0
+INP 04 // Upper boundary for sum
+STA 01 // Store i in 1
+LDK 01 // Load 1 for increment
+STA 02 // Store 1 for increment Do not change
+LDA 01 // Load i back in akku
+MUL 01 // i * i
+MUL 01 // i^2 * i
+ADD 03 // Akku += DestinationSum
+STA 03 // Store Sum back to DestinationSum
+LDA 01 // Load i back to akku
+ADD 02 // increment akku for next cycle
+STA 01 // store akku to 1 for next cycle
+JLE 05 // check Akku against uppber boundary
+OUT 03 // print destinationSum
+HLT 99 // program end

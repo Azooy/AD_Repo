@@ -1,0 +1,40 @@
+#include <iostream>
+#include <stdlib.h>
+
+using namespace std;
+
+int ggT(int a, int b){
+    int res;
+    do{
+        res = a % b;
+        a = b;
+        b = res;
+    }
+    while(res!=0);
+    return a;
+}
+
+int ggT_recursive(int a, int b, int res=1){
+    res = a%b;
+    a = b;
+    b = res;
+    if(res != 0){
+        ggT_recursive(a, b, res);}
+    else{
+        return a;
+    }
+}
+
+
+int kgV(int a, int b){
+    return((a*b)/ggT(a,b));
+}
+
+int main(){
+    int a = 60;
+    int b = 50;
+    int result;
+    result = ggT_recursive(a, b);
+    cout << result;
+    return 0;
+}
