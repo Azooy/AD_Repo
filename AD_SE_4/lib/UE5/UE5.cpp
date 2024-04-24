@@ -88,7 +88,14 @@ void BuildHeap(int a[],int f,int l)
         Heapify(a,f,l,i);
 }
 
-
+void randomFill(vector<vector<int>>& matrix, int length){
+    int random;
+    for(int i= 0; i < length; i++){
+        for(int j = 0; j < length;j++){
+            matrix[i][j] = rand()%100;
+        }
+    }
+}
 
 vector<vector<int>> matmul1(vector<vector<int>> m1, vector<vector<int>> m2){ // Annahme 2x2 Matrix
     int n1 = m1.size();
@@ -108,7 +115,6 @@ vector<vector<int>> matmul1(vector<vector<int>> m1, vector<vector<int>> m2){ // 
 
 vector<vector<int>> add(vector<vector<int>> m1, vector<vector<int>> m2){
     int size=m1.size();
-    int size2=m2.size();
     vector<vector<int>> result(size, vector<int>(size,0));
     for(int i = 0; i < size; i++){
         for(int j=0; j < size; j++){
@@ -159,18 +165,19 @@ vector<vector<int>> join (vector<vector<int>>& O_11,vector<vector<int>>& O_12,ve
 
     int rowIndex=0;
     int colIndex=0;
-    //For upper left
+
+
     // For upper left
-    for(int i = 0; i < rowC/2; i++){
-        for(int j = 0; j < colC/2; j++){
+    for(int i = 0; i < rowC; i++){
+        for(int j = 0; j < colC; j++){
             result[i][j] = O_11[i][j];
         }
     }
 
     // For upper right
     for(int i = 0; i < rowC; i++){
-        for(int j = colEnd/2; j < colEnd; j++){
-            result[i][j*2] = O_12[i][j];
+        for(int j = colC; j < colEnd; j++){
+            result[i][j] = O_12[i][j-colC];
         }
     }
 
@@ -190,99 +197,59 @@ vector<vector<int>> join (vector<vector<int>>& O_11,vector<vector<int>>& O_12,ve
 
     return result;
 }
-  /*  for(int i = 0; i < rowC;i++){
-        colIndex=0;
-        for(int j = 0; j < colC;j++){
-            result[i][j] = O_11[rowIndex][colIndex];
-            colIndex++;
+
+void printmatrix(vector<vector<int>> matrix){
+    cout << "---------------"<<endl;
+    for(int i = 0; i < matrix.size(); i++){
+        for(int j = 0; j < matrix.size();j++){
+            cout << matrix[i][j] << " ";
         }
-        rowIndex++;
+     cout << endl;
     }
-
-
-    //For upper right
-    rowIndex=0;
-    colIndex=0;
-
-    for(int i = 0; i < rowEnd; i++){
-        colIndex=0;
-        for(int j = colEnd/2; j < colEnd;j++){
-            result[i][j] = O_12[rowIndex][colIndex];
-            colIndex++;
-        }
-        rowIndex++;
-    }
-
-    //For lower left
-    rowIndex=0;
-    colIndex=0;
-    for(int i = rowEnd/2; i < rowEnd; i++){
-        colIndex=0;
-        for(int j = 0; j < colEnd/2; j++){
-            result[i][j] = O_21[rowIndex][colIndex];
-            colIndex++;
-        }
-        rowIndex++;
-    }
-
-    //For lower right
-    rowIndex=0;
-    colIndex=0;
-    for(int i = rowC + 1; i < rowEnd; i++){
-        colIndex=0;
-        for(int j = colC; j < colEnd; j++){
-            result[i][j] = O_22[rowIndex][colIndex];
-            colIndex++;
-        }
-        rowIndex++;
-    }
-
-    return result;
-}*/
+    cout << "----------" << endl;
+}
 
 vector<vector<int>> strassen(vector<vector<int>> m, vector<vector<int>> n, int len){
     int H1, H2, H3, H4, H5, H6, H7;
     int length = m.size();
     //vector<vector<int>> result(len/2, vector<int>(len/2, 0));
     if(length <= 2){
-        //vector<vector<int>> result(len, vector<int>(len, 0));
-        return matmul1(m,n);
+        vector<vector<int>> result(len, vector<int>(len, 0));
+        result = matmul1(m,n);
+        return result;
     } else {
-        //vector<vector<int>> result(len/2, vector<int>(len/2, 0));
-        vector<vector<int>> a,b,c,d,e,f,g,h;
+
+        vector<vector<int>> m_11,m_12,m_21,m_22,n_11,n_12,n_21,n_22;
         vector<vector<int>> p1,p2,p3,p4,p5,p6,p7,p8;
         //Splitting the left matrix
-        a = split(m, 0, 0, (len/2), (len/2));
-        b = split(m, 0,(len/2), (len/2), len);
-        c = split(m, len/2, 0, len, (len/2));
-        d = split(m, len/2, len/2, len, len);
+        m_11 = split(m, 0, 0, (len / 2), (len / 2));
+        m_12 = split(m, 0, (len / 2), (len / 2), len);
+        m_21 = split(m, len / 2, 0, len, (len / 2));
+        m_22 = split(m, len / 2, len / 2, len, len);
 
         //Splitting the right matrix
-        e = split(n, 0, 0, (len/2), (len/2));
-        f = split(n, 0,len/2, (len/2), len);
-        g = split(n, len/2, 0, len, (len/2));
-        h = split(n, len/2, len/2, len, len);
+        n_11 = split(n, 0, 0, (len / 2), (len / 2));
+        n_12 = split(n, 0, len / 2, (len / 2), len);
+        n_21 = split(n, len / 2, 0, len, (len / 2));
+        n_22 = split(n, len / 2, len / 2, len, len);
         int slength = len/2;
-        p1= strassen(add(a,d),add(e,h), slength);
-        p2= strassen(add(c,d),e, slength);
-        p3= strassen(a,sub(f,h), slength);
-        p4= strassen(d,sub(g,e),slength);
-        p5= strassen(add(a,b),h, slength);
-        p6= strassen(sub(c,a),add(e,f), slength);
-        p7= strassen(sub(b,h),add(g,h), slength);
+        p1= strassen(add(m_11, m_22), add(n_11, n_22), slength);
+        p2= strassen(add(m_21, m_22), n_11, slength);
+        p3= strassen(m_11, sub(n_12, n_22), slength);
+        p4= strassen(m_22, sub(n_21, n_11), slength);
+        p5= strassen(add(m_11, m_12), n_22, slength);
+        p6= strassen(sub(m_21, m_11), add(n_11, n_12), slength);
+        p7= strassen(sub(m_12, m_22), add(n_21, n_22), slength);
+
+
 
         vector<vector<int>> O_11,O_12,O_21,O_22;
-        O_11 = sub(add(p1, p4), add(p5,p7));
-        O_12 = add(p3,p4);
+        O_11 = sub(add(p1,p4), add(p5,p7));
+        O_12 = add(p3,p5);
         O_21 = add(p2,p4);
         O_22 = add(sub(p1,p2),add(p3,p6));
+        
 
-        /*
-         * Hier muss noch der Join realisiert werden, dafür eine weitere Zielmatrix mit der ganz ursprünglichen
-         * Größe erstellen. Dabei 4 For-Loops die entsprechend für den Quadranten links oben, rechts oben, links unten, rechts unten
-         * mappen. (ist easy trust me)
-         *
-         * */
 
         return join(O_11, O_12, O_21, O_22);
     }
