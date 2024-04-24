@@ -203,6 +203,7 @@ void MergeSort(int a[],int f,int l){
 }
 
 bool findS(int a[], int length, int s){
+    // Um n log(n) zu garantieren muss das Array durch MergeSort vorsortiert sein.
     int leftpointer = 0;
     int rightpointer = length;
     while(leftpointer <= rightpointer){

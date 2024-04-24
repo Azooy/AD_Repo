@@ -20,5 +20,5 @@ vector<vector<int>> strassen(vector<vector<int>>,vector<vector<int>>, int);
 
 vector<vector<int>> add(vector<vector<int>>, vector<vector<int>>);
 vector<vector<int>> sub(vector<vector<int>>, vector<vector<int>>);
-vector<vector<int>>& join(vector<vector<int>>&,vector<vector<int>>&,vector<vector<int>>&,vector<vector<int>>&);
+vector<vector<int>> join(vector<vector<int>>&,vector<vector<int>>&,vector<vector<int>>&,vector<vector<int>>&);
 #endif //AD_SE_4_UE5_H
