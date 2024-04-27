@@ -34,5 +34,9 @@ int main() {
         std::cout << "\n";
     }
 
+    /*
+     * This is only for check that Strassen produces same result as usuall Matrixmultiplication
+     */
+
 
 }
