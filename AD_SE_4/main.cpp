@@ -1,19 +1,16 @@
 #include <iostream>
-#include "lib/UE5/UE5.h"
-#include "random"
+#include "lib/UE6/Lottery/Ringlist.h"
 
 using namespace std;
 
 
 
 int main() {
-    int random = rand();
-    vector<vector<int>> matrix(128, vector<int>(128, 0));
-    randomFill(matrix, 128);
-    vector<vector<int>> matrix2(128, vector<int>(128, 0));
-    randomFill(matrix2, 128);
-    vector<vector<int>> matrix3(128, vector<int>(128, 0));
-    matrix3 = strassen(matrix, matrix2,128);
-    printmatrix(matrix3);
+    Ringlist* ring = new Ringlist();
+    for(int i = 1; i<=49; i++){
+        ring->insert(i);
+    }
+    ring->printRing();
+
 
 }
