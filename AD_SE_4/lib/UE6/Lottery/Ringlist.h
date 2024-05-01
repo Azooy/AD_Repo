@@ -5,27 +5,37 @@
 #ifndef AD_SE_4_RINGLIST_H
 #define AD_SE_4_RINGLIST_H
 #include "iostream"
+#include "random"
+
+class Ringlist;
 
 class Element{
 public:
     int value;
     Element* nextLink;
 
-    Element(int val_): value(val_), nextLink(nullptr){
 
-    }
-
+    Element();
+    explicit Element(int val_);
+    Element(int val_, Element* nextLink_);
 };
+
+
 
 class Ringlist {
 public:
     Element* head;
     Element* tail;
+    int numOfElems = 0;
 
 void insert(int);
-void fill();
+void fill(int,int);
 void remove(int);
 void printRing();
+void incrementNumOfElems();
+int draw();
+int* drawLottery();
+
 };
 
 

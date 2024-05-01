@@ -7,12 +7,12 @@
 
 
 
-class element{
+class element {
 public:
     int value;
-    element* next;
+    element *next;
 
-    element* createElem(int);
+    element *createElem(int);
 };
 
 
