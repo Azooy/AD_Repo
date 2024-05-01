@@ -6,6 +6,7 @@
 #include <stddef.h>
 #include <iostream>
 
+
 void printLinked(element* e1){
     while(e1->next != nullptr){
         std::cout << e1->value << " ";
@@ -14,7 +15,7 @@ void printLinked(element* e1){
     std::cout << e1->value;
 };
 element* element::createElem(int value){
-    element* newE = new element(value, NULL);
+    element* newE = new element(value, nullptr);
     this->next = newE;
     return newE;
 }
