@@ -12,12 +12,14 @@ int main() {
 
     tuple_cl arr[3];
     arr[0].val=60.0;
-    arr[0].weight = 10.0;
+    arr[0].weight = 20.0;
+    arr[0].ratio = arr[0].weight/arr[0].val;
     arr[1].val = 100.0;
-    arr[1].weight = 20.0;
+    arr[1].weight = 15.0;
+    arr[1].ratio = arr[1].weight/arr[1].val;
     arr[2].val = 120.0;
-    arr[2].weight = 30.0;
-
+    arr[2].weight = 20.0;
+    arr[2].ratio = arr[2].weight/arr[2].val;
 
     // Declaring the upper and lower
     // bounds

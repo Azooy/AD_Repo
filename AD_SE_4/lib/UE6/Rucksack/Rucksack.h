@@ -10,6 +10,7 @@ class tuple_cl{
 public:
     double val;
     double weight;
+    double ratio;
 
     tuple_cl();
     tuple_cl(double);
@@ -23,7 +24,7 @@ using namespace std;
 void backpack(tuple_cl[], double, int);
 void mergesort(tuple_cl[], int, int);
 void merge(tuple_cl[], int, int, int);
-double max_weight(tuple_cl[], int, int);
+double max_weight(tuple_cl[], int, double);
 void printarray(tuple_cl[], int);
 
 #endif //AD_SE_4_RUCKSACK_H

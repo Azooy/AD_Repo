@@ -6,12 +6,12 @@
 
 // Überlegung: Array erst einmal sortieren?
 
-tuple_cl::tuple_cl(): val(0), weight(0){};
-tuple_cl::tuple_cl(double val_): val(val_), weight(0){};
-tuple_cl::tuple_cl(double val_, double weight_): val(val_), weight(weight_){};
+tuple_cl::tuple_cl(): val(0), weight(0), ratio(0){};
+tuple_cl::tuple_cl(double val_): val(val_), weight(0), ratio(0){};
+tuple_cl::tuple_cl(double val_, double weight_): val(val_), weight(weight_), ratio(val_/weight_){};
 
 void tuple_cl::print(){
-    std::cout << val << " " << weight << endl;
+    std::cout << val << " " << weight << " " << ratio << endl;
 }
 void printarray(tuple_cl arr_cost[], int size_vals){
     for(int i = 0; i <= size_vals; i++){
@@ -22,12 +22,13 @@ void printarray(tuple_cl arr_cost[], int size_vals){
 // Iterates once over the sorted array and inserts the "best" element in terms of weight to value
 // if the weight is to heavy for the remaining capacity go to the element with the next lower
 // weight-to-value ratio
-double max_weight(tuple_cl arr_cost[], int size, int cap) {
-    int profit = 0;
+double max_weight(tuple_cl arr_cost[], int size, double cap) {
+    double profit = 0;
+    int frontIndex = 0;
     int postIndex = size;
     tuple_cl* array=new tuple_cl[size];
     double max = 0;
-    while (postIndex) {
+    while (postIndex >= frontIndex) {
         if (arr_cost[postIndex].weight <= cap) {
             max += arr_cost[postIndex].weight;
             cap -= arr_cost[postIndex].weight;
@@ -35,12 +36,16 @@ double max_weight(tuple_cl arr_cost[], int size, int cap) {
             array[postIndex] = arr_cost[postIndex];
             postIndex--;
         } else {
+            double rest_ratio = cap/arr_cost[postIndex].weight;
+
+            profit += arr_cost[postIndex].val * rest_ratio;
+            max+= rest_ratio*arr_cost[postIndex].weight;
             postIndex--;
         }
     }
     delete[] array;
-    std::cout << "The maximum profit is : " << profit << endl;
-    return max;
+    std::cout << "The maximum weight is : " << max << endl;
+    return profit;
 }
 
 void backpack(tuple_cl arr_cost[], double capacity, int size_vals) {
