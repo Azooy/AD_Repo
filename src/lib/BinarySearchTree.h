@@ -1,34 +1,21 @@
 #ifndef BINARYSEARCHTREE_H
-#define BINARYSEARCHTREE_H
+#define BINARYSEARCHTREE_H 
 
-class node;
-class tree;
-
-class tree{
-    node* root;
-
+class Tree{
+    int val;
+    Tree* left;
+    Tree* right;
 public:
-    tree();
-    tree(node*);
+    Tree();
+    Tree(int);
+    Tree(int, Tree*);
+    Tree(int, Tree*, Tree*);
 
-void insertNode(node*);
+    void deleteTreeNode(Tree*);
+    void addTreeNode(Tree*);
+    Tree* findTreeNode(Tree*);
+    void deleteTreeNodeRek(Tree*);
+    void printTree();
 };
-
-class node{
-    int value;
-    node* left;
-    node* right;
-public:
-    node();
-    node(int);
-    node(int, node*);
-    node(int, node*, node*);
-
-
-friend class tree;
-};
-
-node* createNode(int);
-
 
 #endif
