@@ -2,11 +2,12 @@
 // Created by Jendrik Juergens on 18.04.24.
 //
 
-#include "UE_3.h"
+#include "../lib/UE_3.h"
 #include "iostream"
 #include "vector"
 #include "stack"
 #include "tuple"
+#include "limits.h"
 
 #define ROW 3
 #define COL 3

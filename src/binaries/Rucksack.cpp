@@ -38,6 +38,7 @@ double max_weight(tuple_cl arr_cost[], int size, int cap) {
             postIndex--;
         }
     }
+    int a = 0;
     delete[] array;
     std::cout << "The maximum profit is : " << profit << endl;
     return max;
