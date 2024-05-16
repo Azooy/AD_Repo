@@ -1,7 +1,7 @@
 .vscode/*
 
 #ignore Debug Files
-.main.dSYM/*
+main.dSYM/*
 
 # Local History for Visual Studio Code
 .history/
@@ -11,3 +11,7 @@
 
 # Built Visual Studio Code Extensions
 *.vsix
+
+.build/*
+
+CMakeLists.txt
