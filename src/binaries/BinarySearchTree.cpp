@@ -26,6 +26,7 @@ Tree* Tree::findTreeNode(Tree* searched){
     if(searched->val == root->val){
         return root;
     }
+    return nullptr;
 }
 
 void Tree::addTreeNode(Tree* newVal){
@@ -56,8 +57,9 @@ void Tree::deleteTreeNode(Tree* ToDelete){
         if(elem->right == nullptr){
             elem = nullptr;
             return;
-        }
-    }
+        } else { return;}
+
+    } else return;
 
     if(elem->left != nullptr){
         if(elem->right == nullptr){
