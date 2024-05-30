@@ -7,6 +7,7 @@
 #include "vector"
 #include "stack"
 #include "tuple"
+#include <limits.h>
 
 #define ROW 3
 #define COL 3
