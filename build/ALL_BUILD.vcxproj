@@ -173,10 +173,6 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </ProjectReference>
-    <ProjectReference Include="C:\Users\jendr\Desktop\VSC-Projects\AD\AD_Repo\build\AD.vcxproj">
-      <Project>{9EF48501-3020-39FB-9D94-7055CDE84402}</Project>
-      <Name>AD</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,3 +1,2 @@
-C:/Users/jendr/Desktop/VSC-Projects/AD/AD_Repo/build/CMakeFiles/AD.dir
 C:/Users/jendr/Desktop/VSC-Projects/AD/AD_Repo/build/CMakeFiles/ALL_BUILD.dir
 C:/Users/jendr/Desktop/VSC-Projects/AD/AD_Repo/build/CMakeFiles/ZERO_CHECK.dir

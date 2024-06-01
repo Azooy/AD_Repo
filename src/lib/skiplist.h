@@ -16,15 +16,13 @@ public:
     std::vector<skiplistNode*> forward;
 
     skiplistNode():value(0), height(MAXHEIGHT){};
-    ~skiplistNode(){
-        forward.clear();
-    }
 
     void insert(int);
     bool search(int);
+    bool search_rek(int);
     void deleteNode(int);
     void print();
-    void deinit(skiplist*);
+    void deinit();
     int findPosition(int);
  
 };
@@ -37,6 +35,7 @@ public:
 
     // Methods 
     bool search(int);
+    bool search_rek(int);
     void insert(int);
     void deleteNode(int);
     void print();
@@ -44,9 +43,16 @@ public:
     void deinit();
     
 
-    ~skiplist(){
-      head->deinit(this);
+    ~skiplist() {
+      skiplistNode* current = head;
+      skiplistNode* head_ = head;
+      while (current != nullptr) {
+          skiplistNode* next = current->forward.at(0);
+          delete current;
+          nodeCount--;
+          current = next;
     }
+}
   
     friend class skiplistNode;
     

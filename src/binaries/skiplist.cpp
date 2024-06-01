@@ -1,6 +1,26 @@
 #include "../lib/skiplist.h"
 
 
+bool skiplist::search_rek(int key){
+    skiplistNode* current = head;
+    return current->search_rek(key);
+}
+
+bool skiplistNode::search_rek(int key){
+    skiplistNode* current = this;
+    if(current->value == INT32_MAX){
+      return 0;
+    }
+    else if(current->value == key){
+      return 1;
+    }
+    else {
+      return current->forward.at(0)->search_rek(key);
+    }
+
+}
+
+
 int skiplistNode::findPosition(int key){
     skiplistNode* current = this;
     int position = 0;
@@ -18,6 +38,10 @@ int skiplistNode::findPosition(int key){
 
 
 void skiplist::print(){
+  if(this->nodeCount == 0){
+    std::cout << "no skiplist";
+    return;
+  }
   skiplistNode* current = head;
   current->print();
   std::cout << std::endl;
@@ -26,49 +50,28 @@ void skiplist::print(){
 
 
 void skiplistNode::print(){
-    skiplistNode* head = this;
-    skiplistNode* current = this;
-    for(int i = MAXHEIGHT-1; i >= 0; i--){
-      int position=0;
-      while(current->value <= INT32_MAX){
-        position = head->findPosition(current->value);
-        for(int i = 0; i < position; i++){
-          std::cout << "-";
-        }
-        std::cout << "" << "[" << current->value << "]";
-        if(current->forward.at(i) != nullptr){
-          current = current->forward.at(i);
-        } else{
-          break;
-        }
+  
+  skiplistNode* head = this;
+  skiplistNode* current = this;
+  for(int i = MAXHEIGHT-1; i >= 0; i--){
+    while(current->value <= INT32_MAX){
+      if(current->value == INT32_MIN){
+        std::cout << "[-inf]";
+        current = current->forward.at(i);
+        continue;
       }
-        current = head;
-        std::cout << std::endl;
+      if(current->value == INT32_MAX){
+        std::cout << "[inf]";
+        current= head;
+        break;
       }
-        /*if(current->forward.at(i)->value == INT32_MAX){
-          std::cout << "[" << current->value << "]";
-          for(int i = 0; i <= nodeCount; i++){
-            std::cout << "-------";
-          }
-          std::cout << ">[" << current->forward.at(i)->value << "]";
-          break;
-        } else {
-          
-          std::cout << "[" << current->value << "]";
-          std::cout << "-->";
-          nodeCount--;
-          current = current->forward.at(i);
-        }
-      }
-      std::cout << std::endl;
-      nodeCount = skip.nodeCount;
-      current = temp;
-    }*/
-
-
-    
-
+      std::cout << "[" << current->value << "]";
+      current = current->forward.at(i);
+    }
+    std::cout << std::endl;
+  }
 }
+
 
 
 void skiplist::deleteNode(int key){
@@ -190,17 +193,7 @@ int randomNumberGenerator(){
 
 
 void skiplist::deinit(){
-  skiplistNode* current = head;
-  skiplist* liste = this;
-  current->deinit(liste);
   delete this;
 }
 
-void skiplistNode::deinit(skiplist* liste){
-  skiplistNode* current = this;
-  while(current->forward.at(0)!= nullptr){
-    current = current->forward.at(0);
-    current->deinit(liste);}
-    forward.clear();
 
-}
